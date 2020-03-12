@@ -43,8 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttackCard.cs" />
+    <Compile Include="Card.cs" />
+    <Compile Include="DefenceCard.cs" />
+    <Compile Include="Opponent.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScrapCard.cs" />
+    <Compile Include="SneakAttackCard.cs" />
+    <Compile Include="StrikeAttackCard.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="ThrowAttackCard.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
