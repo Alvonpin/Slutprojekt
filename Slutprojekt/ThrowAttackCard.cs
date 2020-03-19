@@ -8,6 +8,16 @@ namespace Slutprojekt
 {
     class ThrowAttackCard : AttackCard
     {
+        public ThrowAttackCard(int power, string name)
+        {
+
+        }
+
+        public override void Play(Card card)
+        {
+
+        }
+
         //CONSTRUCTOR (power, name, description)
 
         //METOD (overide) Attack

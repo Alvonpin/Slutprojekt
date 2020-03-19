@@ -11,7 +11,17 @@ namespace Slutprojekt
         //Enum type?
         private int _height;
         private int _durability;
+        private int _monkeyScare;
 
+        public ScrapCard (int height, int durability, int monkeyScare, string name)
+        {
+
+        }
+
+        public override void Play(Card card)
+        {
+
+        }
 
         //CONSTRUCTOR (height, durability, type, name, description)
 

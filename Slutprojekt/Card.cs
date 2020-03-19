@@ -12,6 +12,10 @@ namespace Slutprojekt
         protected string _description;
 
         //METOD Play
+        public virtual void Play(Card card)
+        {
+
+        }
 
     }
 }

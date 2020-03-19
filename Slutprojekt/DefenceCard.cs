@@ -10,6 +10,16 @@ namespace Slutprojekt
     {
         int durability;
 
+        public DefenceCard(int durability, string name)
+        {
+
+        }
+
+        public override void Play(Card card)
+        {
+
+        }
+
         //CONSTRUCTOR (name, description, durability)
         //METOD (overide) Play
     }
