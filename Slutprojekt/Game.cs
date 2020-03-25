@@ -9,8 +9,13 @@ namespace Slutprojekt
     class Game
     {
       
-        private Stack<Card> _cards;
+        private Stack<Card> _deck;
         private int _monkeyHight;
+
+        //public Stack<Card> Cards
+        //{
+           // get { return _cards;  }
+        //}
 
         public Game ()
         {
@@ -47,6 +52,12 @@ namespace Slutprojekt
         //CreatePlayers (Kan välja mellan att spela mot en opponent eller en annan user)
 
         //METOD: PlayRound (player)
+
+        public void PlayRound (Player player)
+        {
+            player.DrawCards(_deck);
+            //player.Build(input checkad av input manager); 
+        }
 
     }
 }

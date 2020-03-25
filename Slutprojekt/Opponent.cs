@@ -8,6 +8,11 @@ namespace Slutprojekt
 {
     class Opponent : Player
     {
+        public override void Build(ScrapCard card)
+        {
+            //Kortet slumpas fram
+            //Kortet läggs högst upp i spelarens torn
+        }
 
     }
 }
