@@ -8,9 +8,16 @@ namespace Slutprojekt
 {
     class Game
     {
+        private int input;
       
         private Stack<Card> _deck;
         private int _monkeyHight;
+
+        private Player user;
+        private Player opponent;
+        private TextManager litaratePerson;
+        private InputManager inputManager;
+
 
         //public Stack<Card> Cards
         //{
@@ -19,6 +26,13 @@ namespace Slutprojekt
 
         public Game ()
         {
+            input = 0;
+
+            user = new Player();
+            opponent = new Player();
+            litaratePerson = new TextManager();
+            inputManager = new InputManager();
+
             List<Card> cards = new List<Card> 
             {
                 new ScrapCard(4, 5, 0, "Älgtorn"), //Fritid
@@ -44,6 +58,15 @@ namespace Slutprojekt
 
         }
 
+        public Stack<Card> ShuffleCards (List<Card> cards)
+        {
+
+        }
+
+        public void ScareMonkey ()
+        {
+
+        }
 
         //CONSTRUCROR
         //CreateCards (en förutbestämd lista av ett antal olika kort)
@@ -56,7 +79,19 @@ namespace Slutprojekt
         public void PlayRound (Player player)
         {
             player.DrawCards(_deck);
-            //player.Build(input checkad av input manager); 
+
+            litaratePerson.ReadInstructions();
+            litaratePerson.ReadCards(player);
+
+            bool sucess = false;
+            while (sucess == false)
+
+            {
+                input = inputManager.GetInputNumber(out sucess, out string error, 0, player.Hand.Count);
+                if (sucess == false) { Console.WriteLine(error); }
+            }
+
+            player.Build(input);
         }
 
     }

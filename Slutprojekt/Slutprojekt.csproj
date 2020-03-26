@@ -55,6 +55,7 @@
     <Compile Include="SneakAttackCard.cs" />
     <Compile Include="StrikeAttackCard.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="TextManager.cs" />
     <Compile Include="ThrowAttackCard.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

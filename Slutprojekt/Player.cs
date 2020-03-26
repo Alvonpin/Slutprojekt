@@ -12,6 +12,11 @@ namespace Slutprojekt
         private List<Card> _hand;
         private List<Card> _tower;
 
+        public List<Card> Hand
+        {
+          get { return _hand;  }
+        }
+
         public void DrawCards(Stack<Card> deck)
         {
             //Lägger till kort från deck tills spelaren har 5 kort i handen
@@ -21,9 +26,31 @@ namespace Slutprojekt
             }
         }
 
-        public virtual void Build (int cardNumber)
+        public Card SelectCard()
+        {
+            string input = Console.ReadLine();
+            bool sucess = int.TryParse(input, out int result);
+
+            if (sucess == true && result <= _hand.Count)
+            {
+                return _hand[result];
+            }
+
+            else
+            {
+                return null; // FIX
+            }
+        }
+
+        public void Build (int cardNumber)
         {
             _hand[cardNumber].Play();
+        }
+
+
+        public void Attack ()
+        {
+
         }
 
 

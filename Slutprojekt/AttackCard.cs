@@ -10,6 +10,13 @@ namespace Slutprojekt
     {
         int power;
 
+        public override void Play()
+        {
+            
+        }
+
         //METOD (overide) Play
+
+
     }
 }

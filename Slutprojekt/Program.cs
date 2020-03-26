@@ -11,11 +11,9 @@ namespace Slutprojekt
         static void Main(string[] args)
         {
 
-            //Skapa en instans av Game (med detta skapas och blandas en korthög och en apa med en starhöjd skapas)
-
-            //LOOP
-            //PlayRound(user)
-            //PlayRound(opponet)
+            Game game = new Game();
+            //game.PlayRound();
+            //game.PlayRound();   JAG KAN INTE KOMMA ÅT SPELARNA HÄR
             
 
 

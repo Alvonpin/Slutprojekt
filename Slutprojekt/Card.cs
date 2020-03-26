@@ -11,6 +11,11 @@ namespace Slutprojekt
         protected string _name; //protectd ger acess till subklasser
         protected string _description;
 
+        public string Name
+        {
+          get { return _name;  }
+        }
+
         //METOD Play
         public virtual void Play()
         {

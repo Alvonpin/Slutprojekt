@@ -9,7 +9,7 @@ namespace Slutprojekt
     class InputManager
     {
         //Metoden returnerar 0 om den misslyckas och resultatet om den lyckas samt en bool som indikerar om den lyckats eller misslyckats
-        static public int GetInputNumber(out bool sucess)
+         public int GetInputNumber(out bool sucess)
         {
             string input = Console.ReadLine();
             sucess = int.TryParse(input, out int result);
@@ -19,7 +19,7 @@ namespace Slutprojekt
         }
 
         //Metoden returnerar även en string som utgörs av ett errormeddelande
-        static public int GetInputNumber(out bool sucess, out string error, int max, int min)
+         public int GetInputNumber(out bool sucess, out string error, int max, int min)
         {
             string input = Console.ReadLine();
             sucess = int.TryParse(input, out int result);
@@ -31,11 +31,6 @@ namespace Slutprojekt
             if (result > max) { error = "To big"; sucess = false; return 0; }
 
             else { error = ""; sucess = true; return result; }
-        }
-
-        static public Card GetInputCard(int cardNumber)
-        {
-            
         }
     }
 }
