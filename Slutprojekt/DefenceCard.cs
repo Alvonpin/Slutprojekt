@@ -15,7 +15,7 @@ namespace Slutprojekt
 
         }
 
-        public override void Play(Card card)
+        public override void Play()
         {
 
         }

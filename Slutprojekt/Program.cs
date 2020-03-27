@@ -12,12 +12,13 @@ namespace Slutprojekt
         {
 
             Game game = new Game();
-            //game.PlayRound();
-            //game.PlayRound();   JAG KAN INTE KOMMA ÅT SPELARNA HÄR
-            
 
-
-
+            bool endGame = false;
+            while  (endGame == false)
+            {
+                game.PlayRound(game.User);
+                game.PlayRound(game.Opponent); 
+            }
 
         }
     }

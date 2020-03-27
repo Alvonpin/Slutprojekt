@@ -8,31 +8,39 @@ namespace Slutprojekt
 {
     class Game
     {
+        public static Random Generator = new Random();
+
         private int input;
       
         private Stack<Card> _deck;
         private int _monkeyHight;
 
-        private Player user;
-        private Player opponent;
+        private Player _user;
+        private Opponent _opponent;
         private TextManager litaratePerson;
-        private InputManager inputManager;
+        //private InputManager inputManager;
 
+        public Player User
+        {
+            get { return _user; }
+        }
 
-        //public Stack<Card> Cards
-        //{
-           // get { return _cards;  }
-        //}
+        public Opponent Opponent
+        {
+            get { return _opponent; }
+        }
+
 
         public Game ()
         {
-            input = 0;
+            //input = 0;
 
-            user = new Player();
-            opponent = new Player();
+            _user = new Player();
+            _opponent = new Opponent();
             litaratePerson = new TextManager();
-            inputManager = new InputManager();
+            //inputManager = new InputManager();
 
+                        //cards.Add Lägg in specifika kort tex SneakAttackCard(name, description, power)
             List<Card> cards = new List<Card> 
             {
                 new ScrapCard(4, 5, 0, "Älgtorn"), //Fritid
@@ -53,20 +61,34 @@ namespace Slutprojekt
                 new DefenceCard (3, "Frityrolja")
 
             }; 
-            //cards.Add Lägg in specifika kort tex SneakAttackCard(name, description, power)
 
 
         }
 
-        public Stack<Card> ShuffleCards (List<Card> cards)
-        {
+       // public Stack<Card> ShuffleCards (List<Card> cards)
+        //{
 
-        }
+        //}
 
         public void ScareMonkey ()
         {
 
         }
+
+        public void PlayRound (Player player)
+        {
+
+            player.DrawCards(_deck);
+
+            litaratePerson.ReadInstructions();
+            litaratePerson.ReadCards(player);
+
+            player.Build(player.SelectCard("ScrapCard"));
+            player.Attack(player.SelectCard("AttackCard"));
+            player.Trash(player.SelectCard("AnyCard"));
+
+        }
+
 
         //CONSTRUCROR
         //CreateCards (en förutbestämd lista av ett antal olika kort)
@@ -76,23 +98,29 @@ namespace Slutprojekt
 
         //METOD: PlayRound (player)
 
-        public void PlayRound (Player player)
-        {
-            player.DrawCards(_deck);
 
-            litaratePerson.ReadInstructions();
-            litaratePerson.ReadCards(player);
 
-            bool sucess = false;
-            while (sucess == false)
+        //------------------------------------------------------------------------------------------------------
+        //GAMMLA GREJER
+        //-----------------------------------------------------------------------------------------------------
 
-            {
-                input = inputManager.GetInputNumber(out sucess, out string error, 0, player.Hand.Count);
-                if (sucess == false) { Console.WriteLine(error); }
-            }
+        //public void PlayRound (Player player)
+        //{
+        //player.DrawCards(_deck);
 
-            player.Build(input);
-        }
+        //litaratePerson.ReadInstructions();
+        //litaratePerson.ReadCards(player);
+
+        //bool sucess = false;
+        //while (sucess == false)
+
+        //{
+        //input = inputManager.GetInputNumber(out sucess, out string error, 0, player.Hand.Count);
+        //if (sucess == false) { Console.WriteLine(error); }
+        //}
+
+        //player.Build(input);
+        //}
 
     }
 }

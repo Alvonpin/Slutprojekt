@@ -8,10 +8,10 @@ namespace Slutprojekt
 {
     class Opponent : Player
     {
-        public override void Build(ScrapCard card)
+        public override Card SelectCard(string cardType)
         {
-            //Kortet slumpas fram
-            //Kortet läggs högst upp i spelarens torn
+            //Error check för type behövs
+            return _hand[Game.Generator.Next(0, _hand.Count)];
         }
 
     }

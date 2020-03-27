@@ -18,9 +18,9 @@ namespace Slutprojekt
 
         }
 
-        public override void Play(Card card)
+        public override void Play()
         {
-
+            //Måste inte towers vara static för att korten ska nå dem?
         }
 
         //CONSTRUCTOR (height, durability, type, name, description)

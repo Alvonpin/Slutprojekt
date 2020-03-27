@@ -8,9 +8,9 @@ namespace Slutprojekt
 {
     class Player
     {
-        private string name;
-        private List<Card> _hand;
-        private List<Card> _tower;
+        protected string name;
+        protected List<Card> _hand;
+        protected List<Card> _tower;
 
         public List<Card> Hand
         {
@@ -26,31 +26,98 @@ namespace Slutprojekt
             }
         }
 
-        public Card SelectCard()
+        public string CheckCardType(int cardNumber)
         {
-            string input = Console.ReadLine();
-            bool sucess = int.TryParse(input, out int result);
-
-            if (sucess == true && result <= _hand.Count)
+            //Om "klass-typen" är eller ärver från AttackCard
+            if (_hand[cardNumber].GetType().IsAssignableFrom(typeof(AttackCard)))
             {
-                return _hand[result];
+                return "AttackCard";
             }
 
-            else
+            else if (_hand[cardNumber].GetType().IsAssignableFrom(typeof(ScrapCard)))
             {
-                return null; // FIX
+                return "ScrapCard";
+            }
+
+            else 
+            {
+                return "DefenceCard";
             }
         }
 
-        public void Build (int cardNumber)
+        public virtual Card SelectCard(string cardType)
         {
-            _hand[cardNumber].Play();
+            int cardNumber = 0;
+
+            bool sucess = false;
+            while (sucess == false)
+            {
+                string input = Console.ReadLine();
+                sucess = int.TryParse(input, out cardNumber);
+
+                if (sucess == false)
+                {
+                    Console.WriteLine(TextManager.errorNotANumber);
+                }
+
+                else if (cardNumber < _hand.Count + 1)
+                {
+                    Console.WriteLine(TextManager.errorToBig);
+                }
+
+                else if (cardNumber < _hand.Count + 1)
+                {
+                    Console.WriteLine(TextManager.errorToSmall);
+                }
+
+                else if (cardType != CheckCardType(cardNumber))
+                {
+                    //Om det har specificerats att kortet kan vara av vilken typ som helst bryts loopen om de tidigare checkarna har passerats
+                    if (cardType == "AnyCard")
+                    {
+                        sucess = true;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine(TextManager.errorWrongType);
+                    }
+                }
+
+                else
+                {
+                    sucess = true;
+                }
+            }
+
+            return _hand[cardNumber];
+
+        }
+
+        public void Build (Card chosenCard)
+        {
+            //_hand[cardNumber].Play();
+            chosenCard.Play();
+
+            //Ska jag istället ha hela choose card funktionen här?
         }
 
 
-        public void Attack ()
+        public void Attack (Card chosenCard)
         {
+            chosenCard.Play();
+            //Ska jag istället ha hela choose card funktionen här?
+        }
 
+        public void Deffend(Card chosenCard)
+        {
+            chosenCard.Play();
+            //Ska jag istället ha hela choose card funktionen här?
+        }
+
+        public void Trash(Card chosenCard)
+        {
+            _hand.Remove(chosenCard);
         }
 
 
