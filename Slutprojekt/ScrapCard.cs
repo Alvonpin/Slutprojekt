@@ -15,12 +15,15 @@ namespace Slutprojekt
 
         public ScrapCard (int height, int durability, int monkeyScare, string name)
         {
-
+            _height = height;
+            _durability = durability;
+            _monkeyScare = monkeyScare;
+            _name = name;
         }
 
-        public override void Play()
+        public override void Play(Player player)
         {
-            //Måste inte towers vara static för att korten ska nå dem?
+            player.Tower.Add(this);
         }
 
         //CONSTRUCTOR (height, durability, type, name, description)

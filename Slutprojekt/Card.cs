@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt
 {
-    class Card
+    abstract class Card //Klassen är inte menad att kallas
     {
         protected string _name; //protectd ger acess till subklasser
         protected string _description;
@@ -17,10 +17,7 @@ namespace Slutprojekt
         }
 
         //METOD Play
-        public virtual void Play()
-        {
-
-        }
+        public abstract void Play(Player player); //Metoden är inte menad att kallas (därav abstract)
 
     }
 }

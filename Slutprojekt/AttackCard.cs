@@ -8,9 +8,9 @@ namespace Slutprojekt
 {
     class AttackCard : Card
     {
-        int power;
+        protected int _power;
 
-        public override void Play()
+        public override void Play(Player player)
         {
             
         }

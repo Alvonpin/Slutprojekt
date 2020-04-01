@@ -11,7 +11,8 @@ namespace Slutprojekt
         public static Random Generator = new Random();
 
         private int input;
-      
+
+        private List<Card> _cards;
         private Stack<Card> _deck;
         private int _monkeyHight;
 
@@ -34,14 +35,15 @@ namespace Slutprojekt
         public Game ()
         {
             //input = 0;
-
+            _monkeyHight = 12;
+            _deck = new Stack<Card>(); 
             _user = new Player();
             _opponent = new Opponent();
             litaratePerson = new TextManager();
             //inputManager = new InputManager();
 
-                        //cards.Add Lägg in specifika kort tex SneakAttackCard(name, description, power)
-            List<Card> cards = new List<Card> 
+            //cards.Add Lägg in specifika kort tex SneakAttackCard(name, description, power)
+            _cards = new List<Card> 
             {
                 new ScrapCard(4, 5, 0, "Älgtorn"), //Fritid
                 new ScrapCard(2, 2, 0, "Tio bowlingkäglor"), //Fritid
@@ -60,15 +62,19 @@ namespace Slutprojekt
                 new DefenceCard (1, "Paraply"),
                 new DefenceCard (3, "Frityrolja")
 
-            }; 
+            };
 
 
+            _deck = ShuffleCards(_cards);
         }
 
-       // public Stack<Card> ShuffleCards (List<Card> cards)
-        //{
+        public Stack<Card> ShuffleCards (List<Card> cards)
+        {
+            //Metoden ger alla kort ett slumpmässigt nummer och lägger dem i ordningen efter deras tilldelade nummer
+            cards = cards.OrderBy(x => Generator.Next()).ToList();
 
-        //}
+            return new Stack<Card>(cards);//Returnerar en stack med samma formation som listan
+        }
 
         public void ScareMonkey ()
         {

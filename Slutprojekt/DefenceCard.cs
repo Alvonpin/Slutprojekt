@@ -8,14 +8,15 @@ namespace Slutprojekt
 {
     class DefenceCard : Card
     {
-        int durability;
+        private int _durability;
 
         public DefenceCard(int durability, string name)
         {
-
+            _durability = durability;
+            _name = name;
         }
 
-        public override void Play()
+        public override void Play(Player player)
         {
 
         }

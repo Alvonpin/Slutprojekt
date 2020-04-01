@@ -17,11 +17,28 @@ namespace Slutprojekt
           get { return _hand;  }
         }
 
+        public List<Card> Tower
+        {
+            get { return _tower; }
+        }
+
+        public Player ()
+        {
+            name = "Carl";
+            _hand = new List<Card>();
+            _tower = new List<Card>();
+        }
+
         public void DrawCards(Stack<Card> deck)
         {
             //Lägger till kort från deck tills spelaren har 5 kort i handen
-            for (int i = 0; i < 5 - _hand.Count; i++)
+            while (Hand.Count < 5)
             {
+                if (deck.Count < 1)
+                {
+                    return;
+                }
+
                 _hand.Add(deck.Pop()); //Tar bort översta kortet i deck och lägger till det i spalarens hand
             }
         }
@@ -97,7 +114,7 @@ namespace Slutprojekt
         public void Build (Card chosenCard)
         {
             //_hand[cardNumber].Play();
-            chosenCard.Play();
+            chosenCard.Play(this);
 
             //Ska jag istället ha hela choose card funktionen här?
         }
@@ -105,13 +122,13 @@ namespace Slutprojekt
 
         public void Attack (Card chosenCard)
         {
-            chosenCard.Play();
+            chosenCard.Play(this);
             //Ska jag istället ha hela choose card funktionen här?
         }
 
         public void Deffend(Card chosenCard)
         {
-            chosenCard.Play();
+            chosenCard.Play(this);
             //Ska jag istället ha hela choose card funktionen här?
         }
 

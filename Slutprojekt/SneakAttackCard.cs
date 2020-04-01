@@ -10,10 +10,11 @@ namespace Slutprojekt
     {
         public SneakAttackCard(int power, string name)
         {
-
+            _power = power;
+            _name = name;
         }
 
-        public override void Play()
+        public override void Play(Player player)
         {
 
         }
