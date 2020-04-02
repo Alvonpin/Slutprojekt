@@ -14,7 +14,7 @@ namespace Slutprojekt
             _name = name;
         }
 
-        public override void Play(Player player)
+        public override void Play(Player user)
         {
 
         }

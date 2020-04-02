@@ -8,6 +8,12 @@ namespace Slutprojekt
 {
     class Game
     {
+        //ATT GÖRA
+        //-------------------------------------------------------------------------------
+        //Lägg till torn i spelet istället för spelarna (User tower, Opponet tower)
+        //I metoden Play, ta in tower istället för player
+        //-------------------------------------------------------------------------------
+
         public static Random Generator = new Random();
 
         private int input;
@@ -86,11 +92,15 @@ namespace Slutprojekt
 
             player.DrawCards(_deck);
 
-            litaratePerson.ReadInstructions();
             litaratePerson.ReadCards(player);
 
+            litaratePerson.ReadInstructions("build");
             player.Build(player.SelectCard("ScrapCard"));
+
+            litaratePerson.ReadInstructions("attack");
             player.Attack(player.SelectCard("AttackCard"));
+
+            litaratePerson.ReadInstructions("trash");
             player.Trash(player.SelectCard("AnyCard"));
 
         }

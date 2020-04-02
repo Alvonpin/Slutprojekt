@@ -45,12 +45,13 @@ namespace Slutprojekt
 
         public string CheckCardType(int cardNumber)
         {
-            //Om "klass-typen" är eller ärver från AttackCard
-            if (_hand[cardNumber].GetType().IsAssignableFrom(typeof(AttackCard)))
+            //Om "klass-typen" ärver från AttackCard
+            if (_hand[cardNumber].GetType().IsSubclassOf(typeof(AttackCard)))
             {
                 return "AttackCard";
             }
 
+            //Om "klass-typen" är ett ScrapCard
             else if (_hand[cardNumber].GetType().IsAssignableFrom(typeof(ScrapCard)))
             {
                 return "ScrapCard";
@@ -75,16 +76,19 @@ namespace Slutprojekt
                 if (sucess == false)
                 {
                     Console.WriteLine(TextManager.errorNotANumber);
+                    sucess = false;
                 }
 
-                else if (cardNumber < _hand.Count + 1)
+                else if (cardNumber > _hand.Count)
                 {
                     Console.WriteLine(TextManager.errorToBig);
+                    sucess = false;
                 }
 
-                else if (cardNumber < _hand.Count + 1)
+                else if (cardNumber < 0)
                 {
                     Console.WriteLine(TextManager.errorToSmall);
+                    sucess = false;
                 }
 
                 else if (cardType != CheckCardType(cardNumber))
@@ -98,6 +102,7 @@ namespace Slutprojekt
                     else
                     {
                         Console.WriteLine(TextManager.errorWrongType);
+                        sucess = false;
                     }
                 }
 
