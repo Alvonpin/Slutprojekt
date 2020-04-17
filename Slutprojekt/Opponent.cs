@@ -8,21 +8,21 @@ namespace Slutprojekt
 {
     class Opponent : Player
     {
-        public override Card SelectCard(string cardType)
+        public override Card SelectCard(Type cardType)
         {
             int cardNumber = Game.Generator.Next(0, _hand.Count);
 
-            if (cardType == "AnyCard" || CheckHandForCards(cardType) == true)
+            if (cardType == typeof(Card) || CheckHandForCards(cardType) == true)
             {
                 bool sucess = false;
                 while (sucess == false)
                 {
                     cardNumber = Game.Generator.Next(0, _hand.Count);
 
-                    if (cardType != CheckCardType(cardNumber))
+                    if (cardType != _hand[cardNumber].GetType() && cardType !=_hand[cardNumber].GetType().BaseType)
                     {
                         //Om det har specificerats att kortet kan vara av vilken typ som helst bryts loopen om de tidigare checkarna har passerats
-                        if (cardType == "AnyCard")
+                        if (cardType == typeof(Card))
                         {
                             sucess = true;
                         }

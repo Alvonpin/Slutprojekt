@@ -84,27 +84,27 @@ namespace Slutprojekt
 
         }
 
-        public void PlayRound (Player player)
+        public void PlayRound (out bool avengers, Player player)
         {
             litaratePerson.InterpretBoard(_user, _opponent);//Spelplanen ritas ut. Det vill säga spelarnas torn.
 
             player.ForgetPlayedCards();
-            player.DrawCards(_deck); //Kort dras från korthögen och läggs till i spelarens hand.
+            player.DrawCards(out avengers, _deck); //Kort dras från korthögen och läggs till i spelarens hand.
 
             litaratePerson.ReadCards(player);//Korten som spelaren har på handen skrivs ut.
 
             litaratePerson.ReadInstructions("build");
-            player.Build((ScrapCard)player.SelectCard("ScrapCard"));
+            player.Build((ScrapCard)player.SelectCard(typeof(ScrapCard)));
             /*Även fastän SelectCard returnerar ett Card vet jag att den i detta fall definitivt kommer att returnera ett ScrapCard. 
              *Jag vet detta då metoden SelectCard kollar typen av användarens valda kort i meoden innan det returneras.
              *Detta gör det möjligt för mig definera att metoden SelectCard i detta fall returnerar ett ScrapCard*/
 
             litaratePerson.ReadInstructions("attack");
-            player.Attack((AttackCard)player.SelectCard("AttackCard"));
+            player.Attack((AttackCard)player.SelectCard(typeof(AttackCard)));
             //Detsamma gäller här.
 
             litaratePerson.ReadInstructions("trash");
-            player.Trash(player.SelectCard("AnyCard"));
+            player.Trash(player.SelectCard(typeof(Card)));
             //Då kortet som ska slängas typ inte spelar någon roll behöver den inte defineras.
 
             player.RemovePlayedCards();

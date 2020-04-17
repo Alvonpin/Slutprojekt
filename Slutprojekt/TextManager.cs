@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Console = Colorful.Console;
+using System.Drawing;
 
 namespace Slutprojekt
 {
@@ -69,8 +71,23 @@ namespace Slutprojekt
 
             for (int i = 0; i < player.Hand.Count; i++)
             {
-                Console.WriteLine(i.ToString() + ") " + player.Hand[i].Name);
+                Console.WriteLine();
+                Console.Write((i + 1) + ") " + player.Hand[i].Name);
+
+                if (player.Hand[i].GetType().BaseType != typeof(Card))
+                {
+                    Console.Write(" (" + player.Hand[i].GetType().BaseType.Name + ")",Color.Coral);
+                }
+
+                else
+                {
+                    Console.Write(" (" + player.Hand[i].GetType().Name + ")", Color.Coral);
+                }
+
             }
+
+            Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }

@@ -38,45 +38,35 @@ namespace Slutprojekt
             _playedCards = new List<Card>();
         }
 
-        public void DrawCards(Stack<Card> deck)
+        public void DrawCards(out bool outOfCards, Stack<Card> deck)
         {
-            //Lägger till kort från deck tills spelaren har 5 kort i handen
-            while (Hand.Count < 5)
+            outOfCards = false;
+            if (deck.Count > 5)
             {
-                if (deck.Count < 1)
+                //Lägger till kort från deck tills spelaren har 5 kort i handen
+                while (Hand.Count < 5)
                 {
-                    return;
+                    if (deck.Count < 1)
+                    {
+                        return;
+                    }
+
+                    _hand.Add(deck.Pop()); //Tar bort översta kortet i deck och lägger till det i spalarens hand
                 }
-
-                _hand.Add(deck.Pop()); //Tar bort översta kortet i deck och lägger till det i spalarens hand
             }
+
+            else
+            {
+                outOfCards = true;
+            }
+
         }
 
-        public string CheckCardType(int cardNumber)
-        {
-            //Om "klass-typen" ärver från AttackCard
-            if (_hand[cardNumber].GetType().IsSubclassOf(typeof(AttackCard)))
-            {
-                return "AttackCard";
-            }
-
-            //Om "klass-typen" är ett ScrapCard
-            else if (_hand[cardNumber].GetType().IsAssignableFrom(typeof(ScrapCard)))
-            {
-                return "ScrapCard";
-            }
-
-            else 
-            {
-                return "DefenceCard";
-            }
-        }
-
-        public bool CheckHandForCards(string cardType)
+        public bool CheckHandForCards(Type cardType)
         {
             for (int i = 0; i < _hand.Count; i++)
             {
-                if (CheckCardType(i) == cardType)
+                if (_hand[i].GetType() == cardType || _hand[i].GetType().BaseType == cardType)
                 {
                     return true;
                 }
@@ -85,11 +75,11 @@ namespace Slutprojekt
             return false;
         }
 
-        public virtual Card SelectCard(string cardType)
+        public virtual Card SelectCard(Type cardType)
         {
             int cardNumber = 0;
 
-            if (cardType == "AnyCard" || CheckHandForCards(cardType) == true)
+            if (cardType == typeof(Card) || CheckHandForCards(cardType) == true)
             {
                 bool sucess = false;
                 while (sucess == false)
@@ -97,13 +87,15 @@ namespace Slutprojekt
                     string input = Console.ReadLine();
                     sucess = int.TryParse(input, out cardNumber);
 
+                    cardNumber--;
+
                     if (sucess == false)
                     {
                         Console.WriteLine(TextManager.errorNotANumber);
                         sucess = false;
                     }
 
-                    else if (cardNumber > _hand.Count)
+                    else if (cardNumber >= _hand.Count)
                     {
                         Console.WriteLine(TextManager.errorToBig);
                         sucess = false;
@@ -115,10 +107,10 @@ namespace Slutprojekt
                         sucess = false;
                     }
 
-                    else if (cardType != CheckCardType(cardNumber))
+                    else if (cardType != _hand[cardNumber].GetType() && cardType != _hand[cardNumber].GetType().BaseType)
                     {
                         //Om det har specificerats att kortet kan vara av vilken typ som helst bryts loopen om de tidigare checkarna har passerats
-                        if (cardType == "AnyCard")
+                        if (cardType == typeof(Card))
                         {
                             sucess = true;
                         }
