@@ -10,36 +10,44 @@ namespace Slutprojekt
     {
         public override Card SelectCard(string cardType)
         {
-            //Error check för type behövs
-
             int cardNumber = Game.Generator.Next(0, _hand.Count);
 
-            bool sucess = false;
-            while (sucess == false)
+            if (cardType == "AnyCard" || CheckHandForCards(cardType) == true)
             {
-                if (cardType != CheckCardType(cardNumber))
+                bool sucess = false;
+                while (sucess == false)
                 {
-                    //Om det har specificerats att kortet kan vara av vilken typ som helst bryts loopen om de tidigare checkarna har passerats
-                    if (cardType == "AnyCard")
+                    cardNumber = Game.Generator.Next(0, _hand.Count);
+
+                    if (cardType != CheckCardType(cardNumber))
                     {
-                        sucess = true;
+                        //Om det har specificerats att kortet kan vara av vilken typ som helst bryts loopen om de tidigare checkarna har passerats
+                        if (cardType == "AnyCard")
+                        {
+                            sucess = true;
+                        }
+
+                        else
+                        {
+                            sucess = false;
+                        }
                     }
 
                     else
                     {
-                        sucess = false;
+                        sucess = true;
                     }
                 }
 
-                else
-                {
-                    sucess = true;
-                }
+
+                return _hand[cardNumber];
             }
 
-
-            return _hand[cardNumber];
+            else
+            {
+                return null;
+            }
         }
-
+          
     }
 }

@@ -11,6 +11,7 @@ namespace Slutprojekt
         protected string name;
         protected List<Card> _hand;
         protected List<Card> _tower;
+        protected List<Card> _playedCards;
 
         protected int _towerHeight;
 
@@ -34,6 +35,7 @@ namespace Slutprojekt
             name = "Carl";
             _hand = new List<Card>();
             _tower = new List<Card>();
+            _playedCards = new List<Card>();
         }
 
         public void DrawCards(Stack<Card> deck)
@@ -70,74 +72,104 @@ namespace Slutprojekt
             }
         }
 
+        public bool CheckHandForCards(string cardType)
+        {
+            for (int i = 0; i < _hand.Count; i++)
+            {
+                if (CheckCardType(i) == cardType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public virtual Card SelectCard(string cardType)
         {
             int cardNumber = 0;
 
-            bool sucess = false;
-            while (sucess == false)
+            if (cardType == "AnyCard" || CheckHandForCards(cardType) == true)
             {
-                string input = Console.ReadLine();
-                sucess = int.TryParse(input, out cardNumber);
-
-                if (sucess == false)
+                bool sucess = false;
+                while (sucess == false)
                 {
-                    Console.WriteLine(TextManager.errorNotANumber);
-                    sucess = false;
-                }
+                    string input = Console.ReadLine();
+                    sucess = int.TryParse(input, out cardNumber);
 
-                else if (cardNumber > _hand.Count)
-                {
-                    Console.WriteLine(TextManager.errorToBig);
-                    sucess = false;
-                }
-
-                else if (cardNumber < 0)
-                {
-                    Console.WriteLine(TextManager.errorToSmall);
-                    sucess = false;
-                }
-
-                else if (cardType != CheckCardType(cardNumber))
-                {
-                    //Om det har specificerats att kortet kan vara av vilken typ som helst bryts loopen om de tidigare checkarna har passerats
-                    if (cardType == "AnyCard")
+                    if (sucess == false)
                     {
-                        sucess = true;
+                        Console.WriteLine(TextManager.errorNotANumber);
+                        sucess = false;
+                    }
+
+                    else if (cardNumber > _hand.Count)
+                    {
+                        Console.WriteLine(TextManager.errorToBig);
+                        sucess = false;
+                    }
+
+                    else if (cardNumber < 0)
+                    {
+                        Console.WriteLine(TextManager.errorToSmall);
+                        sucess = false;
+                    }
+
+                    else if (cardType != CheckCardType(cardNumber))
+                    {
+                        //Om det har specificerats att kortet kan vara av vilken typ som helst bryts loopen om de tidigare checkarna har passerats
+                        if (cardType == "AnyCard")
+                        {
+                            sucess = true;
+                        }
+
+                        else
+                        {
+                            Console.WriteLine(TextManager.errorWrongType);
+                            sucess = false;
+                        }
                     }
 
                     else
                     {
-                        Console.WriteLine(TextManager.errorWrongType);
-                        sucess = false;
+                        sucess = true;
                     }
                 }
 
-                else
-                {
-                    sucess = true;
-                }
+                return _hand[cardNumber];
             }
 
-            return _hand[cardNumber];
-
+            else
+            {
+                return null;
+            }
+          
         }
 
         public void Build (ScrapCard chosenCard)
         {
-            chosenCard.Play(this);
-            _towerHeight = _towerHeight + chosenCard.Height;
+            if (chosenCard != null)
+            {
+                chosenCard.Play(this);
+                _playedCards.Add(chosenCard);
+                _towerHeight = _towerHeight + chosenCard.Height;
+            }
         }
 
 
         public void Attack (AttackCard chosenCard)
         {
-            chosenCard.Play(this);
+            if (chosenCard != null)
+            {
+                chosenCard.Play(this);
+                _playedCards.Add(chosenCard);
+            }
         }
 
         public void Deffend(DefenceCard chosenCard)
         {
             chosenCard.Play(this);
+            _playedCards.Add(chosenCard);
         }
 
         public void Trash(Card chosenCard)
@@ -145,13 +177,18 @@ namespace Slutprojekt
             _hand.Remove(chosenCard);
         }
 
+        public void ForgetPlayedCards()
+        {
+            _playedCards.Clear();
+        }
 
-        //METOD: DrawCards
-        //METOD: Build (card)
-        //METOD: Attack (card)
-        //METOD: Deffend (card)
-        //METOD: Trash (card)
-        //METOD: Spank
+        public void RemovePlayedCards()
+        {
+            for (int i = 0; i < _playedCards.Count; i++)
+            {
+                _hand.Remove(_playedCards[i]);
+            }
+        }
 
     }
 }

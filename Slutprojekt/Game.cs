@@ -88,6 +88,7 @@ namespace Slutprojekt
         {
             litaratePerson.InterpretBoard(_user, _opponent);//Spelplanen ritas ut. Det vill säga spelarnas torn.
 
+            player.ForgetPlayedCards();
             player.DrawCards(_deck); //Kort dras från korthögen och läggs till i spelarens hand.
 
             litaratePerson.ReadCards(player);//Korten som spelaren har på handen skrivs ut.
@@ -105,6 +106,8 @@ namespace Slutprojekt
             litaratePerson.ReadInstructions("trash");
             player.Trash(player.SelectCard("AnyCard"));
             //Då kortet som ska slängas typ inte spelar någon roll behöver den inte defineras.
+
+            player.RemovePlayedCards();
         }
 
     }

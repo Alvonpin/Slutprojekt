@@ -16,7 +16,6 @@ namespace Slutprojekt
           get { return _name;  }
         }
 
-        //METOD Play
         public abstract void Play(Player player); //Metoden är inte menad att kallas (därav abstract)
 
     }

@@ -29,26 +29,33 @@ namespace Slutprojekt
 
         public void InterpretBoard(Player user, Player opponent)
         {
+            Console.Clear();
 
-            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine(" -----------");
+            Console.WriteLine("| DITT TORN |                                     Höjd: " + user.TowerHeight.ToString()); 
+            Console.WriteLine(" -----------"); 
             Console.WriteLine();
-
-            Console.WriteLine("DITT TORN");
             for (int i = 0; i < user.Tower.Count; i++)
             {
                 Console.WriteLine(user.Tower[i].Name);
             }
-            Console.WriteLine("Höjd: " + user.TowerHeight.ToString());
+            Console.WriteLine();
 
-            Console.WriteLine("DIN OPPONENTS TORN");
+
+            Console.WriteLine();
+            Console.WriteLine(" --------------------");
+            Console.WriteLine("| DIN OPPONENTS TORN |                            Höjd: " + user.TowerHeight.ToString());
+            Console.WriteLine(" --------------------");
+            Console.WriteLine();
             for (int i = 0; i < opponent.Tower.Count; i++)
             {
                 Console.WriteLine(opponent.Tower[i].Name);
             }
-            Console.WriteLine("Höjd: " + opponent.TowerHeight.ToString());
+            Console.WriteLine();
 
             Console.WriteLine();
-            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine("_________________________________________________________");
+            Console.WriteLine();
         }
 
         public void ReadInstructions(string phase)
