@@ -25,7 +25,6 @@ namespace Slutprojekt
         private Player _user;
         private Opponent _opponent;
         private TextManager litaratePerson;
-        //private InputManager inputManager;
 
         public Player User
         {
@@ -40,15 +39,13 @@ namespace Slutprojekt
 
         public Game ()
         {
-            //input = 0;
             _monkeyHight = 12;
             _deck = new Stack<Card>(); 
             _user = new Player();
             _opponent = new Opponent();
             litaratePerson = new TextManager();
-            //inputManager = new InputManager();
 
-            //cards.Add Lägg in specifika kort tex SneakAttackCard(name, description, power)
+            //Spelets alla kort skapas
             _cards = new List<Card> 
             {
                 new ScrapCard(4, 5, 0, "Älgtorn"), //Fritid
@@ -89,54 +86,26 @@ namespace Slutprojekt
 
         public void PlayRound (Player player)
         {
+            litaratePerson.InterpretBoard(_user, _opponent);//Spelplanen ritas ut. Det vill säga spelarnas torn.
 
-            player.DrawCards(_deck);
+            player.DrawCards(_deck); //Kort dras från korthögen och läggs till i spelarens hand.
 
-            litaratePerson.ReadCards(player);
+            litaratePerson.ReadCards(player);//Korten som spelaren har på handen skrivs ut.
 
             litaratePerson.ReadInstructions("build");
-            player.Build(player.SelectCard("ScrapCard"));
+            player.Build((ScrapCard)player.SelectCard("ScrapCard"));
+            /*Även fastän SelectCard returnerar ett Card vet jag att den i detta fall definitivt kommer att returnera ett ScrapCard. 
+             *Jag vet detta då metoden SelectCard kollar typen av användarens valda kort i meoden innan det returneras.
+             *Detta gör det möjligt för mig definera att metoden SelectCard i detta fall returnerar ett ScrapCard*/
 
             litaratePerson.ReadInstructions("attack");
-            player.Attack(player.SelectCard("AttackCard"));
+            player.Attack((AttackCard)player.SelectCard("AttackCard"));
+            //Detsamma gäller här.
 
             litaratePerson.ReadInstructions("trash");
             player.Trash(player.SelectCard("AnyCard"));
-
+            //Då kortet som ska slängas typ inte spelar någon roll behöver den inte defineras.
         }
-
-
-        //CONSTRUCROR
-        //CreateCards (en förutbestämd lista av ett antal olika kort)
-        //ShuffleCards (blandar korten och lägger dem i en stack)
-        //ScareMonkey (Sätter en starthöjd)
-        //CreatePlayers (Kan välja mellan att spela mot en opponent eller en annan user)
-
-        //METOD: PlayRound (player)
-
-
-
-        //------------------------------------------------------------------------------------------------------
-        //GAMMLA GREJER
-        //-----------------------------------------------------------------------------------------------------
-
-        //public void PlayRound (Player player)
-        //{
-        //player.DrawCards(_deck);
-
-        //litaratePerson.ReadInstructions();
-        //litaratePerson.ReadCards(player);
-
-        //bool sucess = false;
-        //while (sucess == false)
-
-        //{
-        //input = inputManager.GetInputNumber(out sucess, out string error, 0, player.Hand.Count);
-        //if (sucess == false) { Console.WriteLine(error); }
-        //}
-
-        //player.Build(input);
-        //}
 
     }
 }

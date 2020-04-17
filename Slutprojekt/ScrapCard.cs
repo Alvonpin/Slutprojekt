@@ -13,6 +13,11 @@ namespace Slutprojekt
         private int _durability;
         private int _monkeyScare;
 
+        public int Height
+        {
+            get { return _height; }
+        }
+
         public ScrapCard (int height, int durability, int monkeyScare, string name)
         {
             _height = height;

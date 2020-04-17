@@ -12,6 +12,13 @@ namespace Slutprojekt
         protected List<Card> _hand;
         protected List<Card> _tower;
 
+        protected int _towerHeight;
+
+        public int TowerHeight
+        {
+            get { return _towerHeight; }
+        }
+
         public List<Card> Hand
         {
           get { return _hand;  }
@@ -116,25 +123,21 @@ namespace Slutprojekt
 
         }
 
-        public void Build (Card chosenCard)
+        public void Build (ScrapCard chosenCard)
         {
-            //_hand[cardNumber].Play();
             chosenCard.Play(this);
-
-            //Ska jag istället ha hela choose card funktionen här?
+            _towerHeight = _towerHeight + chosenCard.Height;
         }
 
 
-        public void Attack (Card chosenCard)
+        public void Attack (AttackCard chosenCard)
         {
             chosenCard.Play(this);
-            //Ska jag istället ha hela choose card funktionen här?
         }
 
-        public void Deffend(Card chosenCard)
+        public void Deffend(DefenceCard chosenCard)
         {
             chosenCard.Play(this);
-            //Ska jag istället ha hela choose card funktionen här?
         }
 
         public void Trash(Card chosenCard)
