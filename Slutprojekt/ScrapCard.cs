@@ -8,7 +8,6 @@ namespace Slutprojekt
 {
     class ScrapCard : Card
     {
-        //Enum type?
         private int _height;
         private int _durability;
         private int _monkeyScare;
@@ -31,10 +30,6 @@ namespace Slutprojekt
             player.Tower.Add(this);
         }
 
-        //CONSTRUCTOR (height, durability, type, name, description)
-
-        //METOD (overide) Play
-
-        //METOD Collide
+        //public void Collide()
     }
 }

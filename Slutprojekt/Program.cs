@@ -16,16 +16,14 @@ namespace Slutprojekt
 
             Game game = new Game();
 
+            //Loopen körs till dess att det inte finns några kort kvar i spelets korthög
+            //Huruvuda det finns kort avgörs med hjälp av bool endGame
             bool endGame = false;
             while  (endGame == false)
             {
                 game.PlayRound(out endGame, game.User);
                 game.PlayRound(out endGame, game.Opponent); 
-            }
-
-            Console.Clear();
-            Console.WriteAscii("Nu are slut");
-            Console.Read();  
+            } 
 
         }
     }

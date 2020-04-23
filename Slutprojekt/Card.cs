@@ -8,8 +8,8 @@ namespace Slutprojekt
 {
     abstract class Card //Klassen är inte menad att kallas
     {
-        protected string _name; //protectd ger acess till subklasser
-        protected string _description;
+        protected string _name; //Protected ger acess till subklasser
+        protected string _description; //Kort har för närvarande inga beskrivningar 
 
         public string Name
         {

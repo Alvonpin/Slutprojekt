@@ -10,9 +10,10 @@ namespace Slutprojekt
 {
     class TextManager
     {
-        private Dictionary<string, string> _phases;//Funderar på att lägga till phases i Game
+        private Dictionary<string, string> _phases;
 
         //Error meddelanden kan nås av alla klasser då variabeln är statisk
+        //Detta är viktigt då olika klasser kan behöva ge spelaren ett felmeddelande
         public static string errorNotANumber = "Skriv en SIFFRA";
         public static string errorToBig = "Kortet du har valt finns inte på din hand. Skriv ett lägre nummer";
         public static string errorToSmall = "Kortet du har valt finns inte på din hand. Skriv ett högre nummer";
@@ -29,6 +30,7 @@ namespace Slutprojekt
 
         }
 
+        //Metoden skriver ut spelplanen, dvs visar höjden på spelaren och opponentens torn samt vilka kort som ingår i dem
         public void InterpretBoard(Player user, Player opponent)
         {
             Console.Clear();
@@ -46,7 +48,7 @@ namespace Slutprojekt
 
             Console.WriteLine();
             Console.WriteLine(" --------------------");
-            Console.WriteLine("| DIN OPPONENTS TORN |                            Höjd: " + user.TowerHeight.ToString());
+            Console.WriteLine("| DIN OPPONENTS TORN |                            Höjd: " + opponent.TowerHeight.ToString());
             Console.WriteLine(" --------------------");
             Console.WriteLine();
             for (int i = 0; i < opponent.Tower.Count; i++)
@@ -60,20 +62,25 @@ namespace Slutprojekt
             Console.WriteLine();
         }
 
+        //Metoden skriver ut instruktioner som är olika beroende på vilken fas spelaren befinner sig i
+        //Fasen anges när metoden kallas och instruktionerna hämtas ur en dictionary i vilken instruktionerna för den angivna fasen finns
         public void ReadInstructions(string phase)
         {
             Console.WriteLine();
             Console.WriteLine(_phases[phase]);
         }
 
+        //Metoden skriver ut en numrerad lista över alla kort spelaren har på handen
+        //Listan inehåller kortens namn, typ (och egenskaper kan läggas till)
         public void ReadCards(Player player)
         {
 
             for (int i = 0; i < player.Hand.Count; i++)
             {
                 Console.WriteLine();
-                Console.Write((i + 1) + ") " + player.Hand[i].Name);
+                Console.Write((i + 1) + ") " + player.Hand[i].Name);//Listan över kort börjar i spelet på 1 och inte 0, därav i + 1
 
+                //I spelet skrivs kortets typ ut, dvs Attackkort, Försvarskort, eller Skrotkort, därför måste BaseType skrivas ut om kortet inte ärver direkt från Card
                 if (player.Hand[i].GetType().BaseType != typeof(Card))
                 {
                     Console.Write(" (" + player.Hand[i].GetType().BaseType.Name + ")",Color.Coral);

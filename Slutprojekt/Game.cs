@@ -8,19 +8,11 @@ namespace Slutprojekt
 {
     class Game
     {
-        //ATT GÖRA
-        //-------------------------------------------------------------------------------
-        //Lägg till torn i spelet istället för spelarna (User tower, Opponet tower)
-        //I metoden Play, ta in tower istället för player
-        //-------------------------------------------------------------------------------
-
         public static Random Generator = new Random();
-
-        private int input;
 
         private List<Card> _cards;
         private Stack<Card> _deck;
-        private int _monkeyHight;
+        private int _monkeyHight; //Apans funktioner har ännu inte lagts till i spelet
 
         private Player _user;
         private Opponent _opponent;
@@ -67,28 +59,34 @@ namespace Slutprojekt
 
             };
 
-
+            //Korten blandas och läggs i en korthög
             _deck = ShuffleCards(_cards);
         }
 
+        //Metoden tar in listan av kort som finns i spelet och "blandar" inehållet så att korten ligger i en slumpässig ordning
+        //Metoden returnerar en stack med samma formation som listan
+        //I spelet fyller metoden funktionen att blanda spelets alla kort innan det börjar.
         public Stack<Card> ShuffleCards (List<Card> cards)
         {
             //Metoden ger alla kort ett slumpmässigt nummer och lägger dem i ordningen efter deras tilldelade nummer
             cards = cards.OrderBy(x => Generator.Next()).ToList();
 
-            return new Stack<Card>(cards);//Returnerar en stack med samma formation som listan
+            return new Stack<Card>(cards);
         }
 
+        //Metoden kommer användas för att sätta apans höjd i spelets början beroende på antal spelare.
         public void ScareMonkey ()
         {
-
+            //Apans funktioner har änni inte lagts till i spelet
         }
 
+        //Metoden inefattar en runda i spelet och tar in spelaren som spelar rundan
+        //Utöver detta returnerar metoden en bool som avgör huruvida spelkorten är slut eller inte. Om korten är slut är spelet slut. Värdet av denna bool hämtas i DrawCards metoden.
         public void PlayRound (out bool avengers, Player player)
         {
             litaratePerson.InterpretBoard(_user, _opponent);//Spelplanen ritas ut. Det vill säga spelarnas torn.
 
-            player.ForgetPlayedCards();
+            player.ForgetPlayedCards();//Listan inehållande föregående rundas spelade kort rensas
             player.DrawCards(out avengers, _deck); //Kort dras från korthögen och läggs till i spelarens hand.
 
             litaratePerson.ReadCards(player);//Korten som spelaren har på handen skrivs ut.
@@ -101,13 +99,12 @@ namespace Slutprojekt
 
             litaratePerson.ReadInstructions("attack");
             player.Attack((AttackCard)player.SelectCard(typeof(AttackCard)));
-            //Detsamma gäller här.
 
             litaratePerson.ReadInstructions("trash");
             player.Trash(player.SelectCard(typeof(Card)));
             //Då kortet som ska slängas typ inte spelar någon roll behöver den inte defineras.
 
-            player.RemovePlayedCards();
+            player.RemovePlayedCards();//Spelade kort tas bort fråns spelarens hand
         }
 
     }

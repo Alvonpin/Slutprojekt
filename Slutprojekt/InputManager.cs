@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt
 {
+    //Klassen används för närvarande inte utan metoder som hanterar användarinput sköter det på egen hand
+    //En input manager är en framtida förbättrngsmöjlghet 
+
     class InputManager
     {
         //Metoden returnerar 0 om den misslyckas och resultatet om den lyckas samt en bool som indikerar om den lyckats eller misslyckats

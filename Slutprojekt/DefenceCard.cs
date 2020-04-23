@@ -18,10 +18,8 @@ namespace Slutprojekt
 
         public override void Play(Player player)
         {
-
+            //Defense cards funktioner har ännu inte lagts till i spelet
         }
 
-        //CONSTRUCTOR (name, description, durability)
-        //METOD (overide) Play
     }
 }

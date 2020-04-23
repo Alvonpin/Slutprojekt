@@ -16,11 +16,8 @@ namespace Slutprojekt
 
         public override void Play(Player user)
         {
-
+            //Olika attack cards har särkillda egenskaper som ännu inte har implimenterats 
         }
 
-        //CONSTRUCTOR (power, name, description)
-
-        //METOD (overide) Attack
     }
 }

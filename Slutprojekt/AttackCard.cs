@@ -12,11 +12,8 @@ namespace Slutprojekt
 
         public override void Play(Player player)
         {
-            //Måste få tag i även motståndarens torn
+            //Attacker har ännu inte implimenterats 
         }
-
-        //METOD (overide) Play
-
 
     }
 }
